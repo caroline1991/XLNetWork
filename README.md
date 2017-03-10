@@ -49,42 +49,8 @@ typedef void(^XLRequestFailureBlock)(NSError *error, XLResponseSuperObj * respon
 @property (nonatomic, assign) NSTimeInterval cacheInterval;
 
 将自己的请求继承自XLRequestSuperObj调用XLRequestOperationProtocol协议中的请求方法，再配置一些基类XLRequestSuperObj的属性即可。
-for example：
 
-#import "XLRequestSuperObj.h"
-@interface XLRequestTest : XLRequestSuperObj
 
-@property (nonatomic, copy) NSString * name;
-@property (nonatomic, copy) NSString * age;
-
-@end
-
-#import "XLRequestTest.h"
-@implementation XLRequestTest
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.requestUrl = @"这里是具体的请求url";
-        self.needCache = YES;
-    }
-    return self;
-}
-
-- (XLRequestMethodType)requestMethod
-{
-    return XLRequestMethodTypeGet;
-}
-@end
-
-XLRequestTest * request =[[XLRequestTest alloc] init];
-request.name = @"xulin";
-request.age = @"12";
-[request startWithCompletionBlockWithSuccess:^(NSString *responseJsonString, XLResponseSuperObj *responseSupObj) {
-    NSLog(@"%@",responseJsonString);
-} failure:^(NSError *error, XLResponseSuperObj *responseSupObj) {
-    NSLog(@"%@",error);
-}];
 二.缓存功能的实现
 引入XLNetWorkCacheManager.h文件 调用相应方法即可
 + (instancetype)defaultManager;
