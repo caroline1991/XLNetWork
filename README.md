@@ -4,8 +4,10 @@
 一.基本的请求数据功能
 
 1.XLRequestOperationProtocol协议包含一些请求相关操作的方法
+
 /** 请求成功回调block */
 typedef void(^XLRequestSuccessBlock)(NSString * responseJsonString, XLResponseSuperObj * responseSupObj) ;
+
 /** 请求失败回调block */
 typedef void(^XLRequestFailureBlock)(NSError *error, XLResponseSuperObj * responseSupObj) ;
 
@@ -24,18 +26,25 @@ typedef void(^XLRequestFailureBlock)(NSError *error, XLResponseSuperObj * respon
 - (void)clearCompletionBlock;
 
 2.请求实体基类XLRequestSuperObj遵守XLRequestOperationProtocol协议，并且包含一些@required或者@optional的属性
+
 /** 请求url */
 @property (nonatomic, copy) NSString * requestUrl;
+
 /** 是否取消请求 */
 @property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
+
 /** 是否正在执行请求 */
 @property (nonatomic, readonly, getter=isExecuting) BOOL executing;
+
 /** 请求成功回调block */
 @property (nonatomic, copy) XLRequestSuccessBlock successBlock;
+
 /** 请求失败回调block */
 @property (nonatomic, copy) XLRequestFailureBlock failureBlock;
+
 /** 客户端判断是否需要缓存 YES && cacheInterval不赋时，缓存默认5分钟内有效 */
 @property (nonatomic, assign) BOOL needCache;
+
 /** 缓存时效，时间单位:秒 */
 @property (nonatomic, assign) NSTimeInterval cacheInterval;
 
